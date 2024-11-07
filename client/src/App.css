@@ -1,0 +1,11 @@
+.task {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.task span {
+    padding: 10px 8px;
+    background-color: red;
+    color: white;
+    border-radius: 7px;
+}
