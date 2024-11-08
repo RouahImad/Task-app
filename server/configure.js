@@ -22,7 +22,10 @@ export const getTask = async (id) => {
     return rows[0];
 };
 export const addTask = async (task) => {
-    await pool.execute("INSERT INTO tasks (task) VALUES (?)", [task]);
+    const [row] = await pool.execute("INSERT INTO tasks (task) VALUES (?)", [
+        task,
+    ]);
+    return getTask(row.insertId);
 };
 export const deleteTask = async (id) => {
     await pool.execute("DELETE FROM tasks WHERE id = ?", [id]);

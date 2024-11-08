@@ -27,10 +27,11 @@ app.get("/tasks/:id", async (req, res) => {
 app.post("/tasks", async (req, res) => {
     console.log("requested post");
 
-    const { task } = req.body;
-    await addTask(task);
+    const { inputTask } = req.body;
+
+    const resp = await addTask(inputTask);
     res.statusCode = 200;
-    res.send(true);
+    res.json(resp);
 });
 
 app.delete("/tasks/:id", async (req, res) => {
