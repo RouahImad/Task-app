@@ -38,7 +38,9 @@ app.delete("/tasks/:id", async (req, res) => {
     console.log("requested delete");
 
     const id = req.params.id;
-    await deleteTask(id);
+    console.log(id);
+
+    // await deleteTask(id);
     res.statusCode = 200;
     res.send(true);
 });

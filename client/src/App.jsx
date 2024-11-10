@@ -1,4 +1,6 @@
 import { useState, useEffect } from "react";
+import { MdDelete } from "react-icons/md";
+import { FaCheck } from "react-icons/fa6";
 import axios from "axios";
 import "./App.css";
 
@@ -14,11 +16,24 @@ function App() {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        console.log(inputTask);
         axios.post("/tasks", { inputTask }).then(({ data }) => {
             setTasks((old) => [...old, data]);
             setInputTask("");
         });
+    };
+    const handleDelete = (id) => {
+        axios
+            .delete(`/tasks/${id}`)
+            .then(() => {
+                document
+                    .querySelector(`[data-id="${id}"]`)
+                    .classList.add("delete");
+
+                setTimeout(() => {
+                    // setTasks(tasks.filter((task) => task.id != id));
+                }, 500);
+            })
+            .catch((err) => console.log(err));
     };
 
     return (
@@ -36,17 +51,24 @@ function App() {
             <ul className="tasks">
                 {tasks ? (
                     tasks.map(({ id, task, status }) => (
-                        <li className="task" key={id}>
+                        <li className="task" key={id} data-id={id}>
                             <p>{task}</p>
-                            <span
-                                style={{
-                                    backgroundColor: status
-                                        ? "#F44336"
-                                        : "#4CAF50",
-                                }}
-                            >
-                                {status ? "finished" : "active"}
-                            </span>
+                            <div className="actions">
+                                <span
+                                    style={{
+                                        backgroundColor: status
+                                            ? "#F44336"
+                                            : "#4CAF50",
+                                    }}
+                                >
+                                    {status ? "finished" : "active"}
+                                </span>
+                                <MdDelete
+                                    className="delete"
+                                    onClick={() => handleDelete(id)}
+                                />
+                                <FaCheck className="finish" />
+                            </div>
                         </li>
                     ))
                 ) : (
