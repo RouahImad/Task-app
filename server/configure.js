@@ -11,6 +11,7 @@ const pool = mysql
         database: process.env.DB_NAME,
     })
     .promise();
+console.log(pool);
 
 export const getTasks = async () => {
     const [rows] = await pool.query("SELECT * FROM tasks");
@@ -27,6 +28,15 @@ export const addTask = async (task) => {
     ]);
     return getTask(row.insertId);
 };
+export const updateTask = async (id, status) => {
+    await pool.execute("UPDATE tasks SET status = ? WHERE id = ?", [
+        status,
+        id,
+    ]);
+};
 export const deleteTask = async (id) => {
     await pool.execute("DELETE FROM tasks WHERE id = ?", [id]);
+};
+export const deleteAll = async (id) => {
+    await pool.execute("");
 };
