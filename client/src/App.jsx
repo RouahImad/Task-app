@@ -3,11 +3,14 @@ import axios from "axios";
 import FormTask from "./components/FormTask";
 import Tasks from "./components/Tasks";
 import BarAction from "./components/BarAction";
+import TaskUpdateForm from "./components/TaskUpdateForm";
 
 function App() {
     const [tasks, setTasks] = useState([]);
     const [filterType, setFilterType] = useState("all");
     const [inputTask, setInputTask] = useState();
+    const [updateTask, setUpdateTask] = useState({});
+    const [isUpdating, setIsUpdating] = useState(false);
 
     useEffect(() => {
         axios
@@ -63,6 +66,30 @@ function App() {
                 console.log(err);
             });
     };
+
+    const handleUpdate = (e) => {
+        e.preventDefault();
+        const id = updateTask.id;
+        const task = e.target[0].value;
+        const status = e.target[1].value;
+        axios
+            .patch("/tasks", { id, task, status })
+            .then(() => {
+                setTasks(
+                    tasks.map((task) =>
+                        task.id === id ? { ...task, task, status } : task
+                    )
+                );
+                setIsUpdating(false);
+            })
+            .catch((err) => {
+                console.log(err);
+            })
+            .finally(() => {
+                setUpdateTask({});
+            });
+    };
+
     const filteredTasks = useMemo(() => {
         switch (filterType) {
             case "active":
@@ -77,6 +104,7 @@ function App() {
     const handleSelect = (e) => {
         setFilterType(e.target.value);
     };
+
     return (
         <div className="container">
             <FormTask
@@ -89,7 +117,17 @@ function App() {
                 tasks={filteredTasks}
                 handleStatus={handleStatus}
                 handleDelete={handleDelete}
+                setIsUpdating={setIsUpdating}
+                setUpdateTask={setUpdateTask}
             />
+            {isUpdating && (
+                <TaskUpdateForm
+                    updateTask={updateTask}
+                    setIsUpdating={setIsUpdating}
+                    handleUpdate={handleUpdate}
+                    setUpdateTask={setUpdateTask}
+                />
+            )}
         </div>
     );
 }

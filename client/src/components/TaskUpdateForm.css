@@ -1,0 +1,82 @@
+.updateContainer {
+    font-family: math;
+    position: absolute;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: 60vw;
+    background-color: white;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0px 0px 3px #00000080;
+    z-index: 9999;
+    animation: slideIn 0.5s ease forwards;
+}
+@keyframes slideIn {
+    from {
+        left: -60%;
+        opacity: 0;
+    }
+    to {
+        left: 50%;
+        opacity: 1;
+    }
+}
+.updateContainer h2 {
+    color: #333;
+}
+.updateContainer .close {
+    all: unset;
+    display: flex;
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    font-size: 20px;
+    background-color: #f0f0f0;
+    color: #333;
+    padding: 4px;
+    cursor: pointer;
+}
+.updateContainer form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin: 0;
+    margin-inline: 25px;
+    padding: 0;
+}
+.updateContainer .box {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+}
+.updateContainer input {
+    margin: 10px;
+    padding: 5px;
+    width: 200px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+.updateContainer select {
+    margin: 10px;
+    padding: 5px;
+    width: 100px;
+    background-color: #f0f0f0;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    cursor: pointer;
+}
+.updateContainer #updateForm button {
+    margin-block: 10px;
+    padding: 7px;
+    width: 100px;
+    color: white;
+    background-color: #4caf50;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+.updateContainer #updateForm button:hover {
+    background-color: #45a049;
+}

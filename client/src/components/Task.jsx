@@ -2,8 +2,17 @@ import PropTypes from "prop-types";
 import { MdDelete } from "react-icons/md";
 import { IoMdCheckboxOutline } from "react-icons/io";
 import { MdCheckBoxOutlineBlank } from "react-icons/md";
+import { FiEdit } from "react-icons/fi";
 
-const Task = ({ task, handleStatus, handleDelete, id, status }) => {
+const Task = ({
+    id,
+    task,
+    handleStatus,
+    handleDelete,
+    status,
+    setIsUpdating,
+    setUpdateTask,
+}) => {
     return (
         <li className={status ? "task completed" : "task"} data-id={id}>
             <p>{task}</p>
@@ -19,14 +28,15 @@ const Task = ({ task, handleStatus, handleDelete, id, status }) => {
                         onClick={() => handleStatus(id, 1)}
                     />
                 )}
-                <MdDelete className="delete" onClick={() => handleDelete(id)} />
-                <span
-                    style={{
-                        backgroundColor: status ? "#F44336" : "#4CAF50",
+                <FiEdit
+                    className="edit"
+                    onClick={() => {
+                        setIsUpdating(true);
+                        setUpdateTask({ id, task, status });
                     }}
-                >
-                    {status ? "finished" : "active"}
-                </span>
+                />
+                <MdDelete className="delete" onClick={() => handleDelete(id)} />
+                <span>{status ? "finished" : "active"}</span>
             </div>
         </li>
     );
@@ -38,6 +48,8 @@ Task.propTypes = {
     handleDelete: PropTypes.func.isRequired,
     id: PropTypes.number,
     status: PropTypes.number,
+    setIsUpdating: PropTypes.func.isRequired,
+    setUpdateTask: PropTypes.func.isRequired,
 };
 
 export default Task;

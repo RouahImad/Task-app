@@ -37,7 +37,6 @@ body {
     cursor: pointer;
 }
 .tasks {
-    /* margin-top: 45px; */
     padding: 0;
 }
 .task {
@@ -66,12 +65,14 @@ body {
     }
 }
 .task.completed {
-    background-color: #4caf50;
+    background-color: #1daf23bd;
     color: white;
-    text-decoration: line-through;
 }
 .task:not(:last-of-type) {
     margin-bottom: 15px;
+}
+.task.completed p {
+    text-decoration: line-through;
 }
 .task p {
     margin: 10px 5px;
@@ -84,26 +85,34 @@ body {
     gap: 10px;
 }
 .task span {
+    margin-left: 20px;
     padding: 8px 0;
+    background-color: #4caf50;
     color: white;
     width: 66px;
     border-radius: 5px;
     font-size: 13px;
     transition: 0.3s;
 }
-.task .delete,
-.task .check {
+.task.completed span {
+    background-color: white;
+    color: black;
+}
+.task .check,
+.task .edit,
+.task .delete {
     cursor: pointer;
     font-size: 1.3em;
     transition: 0.3s;
 }
-.task .delete:hover {
-    color: #f44336;
-    transform: scale(1.3);
-}
-.task .check:hover {
+.task .check:hover,
+.task .edit:hover {
     transform: scale(1.3);
 }
 .task:not(.completed) .check:hover {
     color: #4caf50;
+}
+.task .delete:hover {
+    color: #f44336;
+    transform: scale(1.3);
 }
