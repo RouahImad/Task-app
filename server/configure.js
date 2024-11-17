@@ -11,7 +11,6 @@ const pool = mysql
         database: process.env.DB_NAME,
     })
     .promise();
-console.log(pool);
 
 export const getTasks = async () => {
     const [rows] = await pool.query("SELECT * FROM tasks");

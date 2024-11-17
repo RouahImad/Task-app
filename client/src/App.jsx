@@ -1,10 +1,12 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useMemo } from "react";
 import axios from "axios";
 import FormTask from "./components/FormTask";
 import Tasks from "./components/Tasks";
+import BarAction from "./components/BarAction";
 
 function App() {
     const [tasks, setTasks] = useState([]);
+    const [filterType, setFilterType] = useState("all");
     const [inputTask, setInputTask] = useState();
 
     useEffect(() => {
@@ -50,19 +52,31 @@ function App() {
     const handleStatus = (id, status) => {
         axios
             .patch("/tasks", { id, status })
-            .then(({ data }) => {
+            .then(() => {
                 setTasks(
                     tasks.map((task) =>
                         task.id === id ? { ...task, status } : task
                     )
                 );
-                console.log(data);
             })
             .catch((err) => {
                 console.log(err);
             });
     };
+    const filteredTasks = useMemo(() => {
+        switch (filterType) {
+            case "active":
+                return tasks.filter((task) => task.status === 0);
+            case "completed":
+                return tasks.filter((task) => task.status === 1);
+            default:
+                return tasks;
+        }
+    }, [tasks, filterType]);
 
+    const handleSelect = (e) => {
+        setFilterType(e.target.value);
+    };
     return (
         <div className="container">
             <FormTask
@@ -70,8 +84,9 @@ function App() {
                 inputTask={inputTask}
                 setInputTask={setInputTask}
             />
+            <BarAction handleSelect={handleSelect} />
             <Tasks
-                tasks={tasks}
+                tasks={filteredTasks}
                 handleStatus={handleStatus}
                 handleDelete={handleDelete}
             />

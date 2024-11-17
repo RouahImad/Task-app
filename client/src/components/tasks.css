@@ -37,7 +37,7 @@ body {
     cursor: pointer;
 }
 .tasks {
-    margin-top: 45px;
+    /* margin-top: 45px; */
     padding: 0;
 }
 .task {
@@ -70,9 +70,13 @@ body {
     color: white;
     text-decoration: line-through;
 }
-
 .task:not(:last-of-type) {
     margin-bottom: 15px;
+}
+.task p {
+    margin: 10px 5px;
+    padding: 0;
+    font-size: 15px;
 }
 .task .actions {
     display: flex;
