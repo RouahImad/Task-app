@@ -1,6 +1,6 @@
 import PropTypes from "prop-types";
 import { MdClose } from "react-icons/md";
-import "./TaskUpdateForm.css";
+import "./taskUpdateForm.css";
 
 const TaskUpdateForm = ({
     updateTask,

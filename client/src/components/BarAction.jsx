@@ -1,5 +1,5 @@
 import PropTypes from "prop-types";
-import "./BarAction.css";
+import "./barAction.css";
 
 const BarAction = ({ handleSelect }) => {
     return (

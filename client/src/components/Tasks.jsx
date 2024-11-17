@@ -1,6 +1,6 @@
 import PropTypes from "prop-types";
 import Task from "./Task";
-import "./Tasks.css";
+import "./tasks.css";
 
 const Tasks = ({
     tasks,
