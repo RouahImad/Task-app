@@ -54,8 +54,15 @@ export const addTask = async (task) => {
 //     return getTask(newId);
 // };
 
-export const updateTask = async (id, status) => {
+export const updateStatus = async (id, status) => {
     await pool.execute("UPDATE tasks SET status = ? WHERE id = ?", [
+        status,
+        id,
+    ]);
+};
+export const updateTask = async (id, task, status) => {
+    await pool.execute("UPDATE tasks SET task = ?, status = ? WHERE id = ?", [
+        task,
         status,
         id,
     ]);

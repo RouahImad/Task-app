@@ -8,16 +8,14 @@ const TaskUpdateForm = ({
     handleUpdate,
     setUpdateTask,
 }) => {
-    const handleInputChange = (e) => {
+    const handleChange = (e) => {
+        const value =
+            e.target.name === "status"
+                ? parseInt(e.target.value)
+                : e.target.value;
         setUpdateTask({
             ...updateTask,
-            task: e.target.value,
-        });
-    };
-    const handleSelectChange = (e) => {
-        setUpdateTask({
-            ...updateTask,
-            status: parseInt(e.target.value),
+            [e.target.name]: value,
         });
     };
 
@@ -35,20 +33,23 @@ const TaskUpdateForm = ({
             </button>
             <form id="updateForm" onSubmit={handleUpdate}>
                 <div className="box">
-                    <label htmlFor="updateTask">Update Task : </label>
+                    <label htmlFor="updateTask">Task : </label>
                     <input
+                        name="task"
                         type="text"
                         id="updateTask"
                         value={updateTask.task || ""}
-                        onChange={handleInputChange}
+                        onChange={handleChange}
+                        required
                     />
                 </div>
                 <div className="box">
-                    <label htmlFor="updateStatus">Update Status : </label>
+                    <label htmlFor="updateStatus">Status : </label>
                     <select
+                        name="status"
                         id="updateStatus"
                         defaultValue={updateTask.status}
-                        onChange={handleSelectChange}
+                        onChange={handleChange}
                     >
                         <option value="0">Active</option>
                         <option value="1">Completed</option>

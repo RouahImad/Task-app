@@ -5,12 +5,13 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-    background-color: #eeeeee;
+    background-color: #ede8ee;
     margin: 0;
     margin-top: 40px;
     min-height: 98vh;
 }
 .container {
+    width: 85vw;
     max-width: 500px;
     margin: auto;
     text-align: center;
@@ -18,16 +19,17 @@ body {
 #taskForm {
     display: flex;
     align-items: center;
+    justify-content: space-between;
     gap: 20px;
 }
 #taskForm input {
-    width: 60vw;
+    width: calc(100% - 60px);
     padding: 10px 5px 10px 15px;
     border-radius: 4px;
     border: 1px solid #333;
 }
 #taskForm button {
-    background-color: #ff5722;
+    background-color: #967cc3;
     color: white;
     width: 60px;
     padding: 8px;
@@ -44,6 +46,7 @@ body {
     display: flex;
     align-items: center;
     justify-content: space-between;
+    gap: 15px;
     background-color: white;
     padding: 5px 12px;
     text-transform: capitalize;
@@ -75,6 +78,9 @@ body {
     text-decoration: line-through;
 }
 .task p {
+    text-wrap: pretty;
+    white-space: break-spaces;
+    text-align: justify;
     margin: 10px 5px;
     padding: 0;
     font-size: 15px;
@@ -83,20 +89,6 @@ body {
     display: flex;
     align-items: center;
     gap: 10px;
-}
-.task span {
-    margin-left: 20px;
-    padding: 8px 0;
-    background-color: #4caf50;
-    color: white;
-    width: 66px;
-    border-radius: 5px;
-    font-size: 13px;
-    transition: 0.3s;
-}
-.task.completed span {
-    background-color: white;
-    color: black;
 }
 .task .check,
 .task .edit,

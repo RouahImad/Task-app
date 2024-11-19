@@ -21,6 +21,17 @@
         opacity: 1;
     }
 }
+@media (max-width: 768px) {
+    .updateContainer {
+        width: 90vw;
+    }
+    .updateContainer #updateForm {
+        margin-inline: 10px;
+    }
+    .updateContainer input {
+        width: 60%;
+    }
+}
 .updateContainer h2 {
     color: #333;
 }
@@ -52,10 +63,10 @@
 }
 .updateContainer input {
     margin: 10px;
-    padding: 5px;
-    width: 200px;
+    padding: 8px 10px;
+    width: 70%;
     border: 1px solid #ccc;
-    border-radius: 5px;
+    border-radius: 4px;
 }
 .updateContainer select {
     margin: 10px;

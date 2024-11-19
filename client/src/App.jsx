@@ -4,6 +4,7 @@ import FormTask from "./components/FormTask";
 import Tasks from "./components/Tasks";
 import BarAction from "./components/BarAction";
 import TaskUpdateForm from "./components/TaskUpdateForm";
+import TaskSkeleton from "./components/TaskSkeleton";
 
 function App() {
     const [tasks, setTasks] = useState([]);
@@ -24,6 +25,7 @@ function App() {
     }, []);
 
     const handleSubmit = (e) => {
+        setInputTask(inputTask.trim());
         e.preventDefault();
         axios
             .post("/tasks", { inputTask })
@@ -69,18 +71,19 @@ function App() {
 
     const handleUpdate = (e) => {
         e.preventDefault();
-        const id = updateTask.id;
-        const task = e.target[0].value;
-        const status = e.target[1].value;
+        setUpdateTask({ ...updateTask, task: updateTask.task.trim() });
+        const newId = updateTask.id;
+        const newTask = updateTask.task;
+        const newStatus = updateTask.status;
+
         axios
-            .patch("/tasks", { id, task, status })
+            .put("/tasks", { newId, newTask, newStatus })
             .then(() => {
                 setTasks(
-                    tasks.map((task) =>
-                        task.id === id ? { ...task, task, status } : task
-                    )
+                    tasks.map((task) => (task.id == newId ? updateTask : task))
                 );
                 setIsUpdating(false);
+                console.log("Task updated");
             })
             .catch((err) => {
                 console.log(err);
@@ -120,6 +123,7 @@ function App() {
                 setIsUpdating={setIsUpdating}
                 setUpdateTask={setUpdateTask}
             />
+            <TaskSkeleton />
             {isUpdating && (
                 <TaskUpdateForm
                     updateTask={updateTask}

@@ -12,14 +12,12 @@ const Tasks = ({
     return (
         <ul className="tasks">
             {tasks.length ? (
-                tasks.map(({ id, task, status }) => (
+                tasks.map((task) => (
                     <Task
-                        key={id}
-                        id={id}
-                        task={task}
+                        key={task.id}
+                        taskData={task}
                         handleStatus={handleStatus}
                         handleDelete={handleDelete}
-                        status={status}
                         setIsUpdating={setIsUpdating}
                         setUpdateTask={setUpdateTask}
                     />

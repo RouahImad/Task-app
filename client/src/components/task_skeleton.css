@@ -1,0 +1,42 @@
+:root {
+    --skeleton-color: #d0cece;
+    --skeleton-color: #e5e5e5;
+}
+.skeleton {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: white;
+    height: 48px;
+    margin: 10px 0;
+    padding: 10px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+.skeleton .skeleton_task {
+    width: 70%;
+    height: 20px;
+    background-color: var(--skeleton-color);
+    border-radius: 3px;
+    animation: wave 1s infinite;
+}
+.skeleton .skeleton_actions {
+    display: flex;
+    gap: 10px;
+    height: 20px;
+}
+.skeleton .skeleton_actions div {
+    padding: 5px 10px;
+    border: none;
+    border-radius: 5px;
+    background-color: var(--skeleton-color);
+    transition: 0.3s;
+}
+@keyframes wave {
+    0% {
+        background-position: -100%;
+    }
+    100% {
+        background-position: 100%;
+    }
+}

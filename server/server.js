@@ -5,6 +5,7 @@ import {
     deleteTask,
     updateTask,
     deleteAll,
+    updateStatus,
 } from "./configure.js";
 import express from "express";
 import dotenv from "dotenv";
@@ -37,9 +38,16 @@ app.post("/tasks", async (req, res) => {
     res.json(resp);
 });
 
+app.put("/tasks", async (req, res) => {
+    const { newId, newTask, newStatus } = req.body;
+    await updateTask(newId, newTask, newStatus);
+    res.statusCode = 200;
+    res.send(true);
+});
+
 app.patch("/tasks", async (req, res) => {
     const { id, status } = req.body;
-    await updateTask(id, status);
+    await updateStatus(id, status);
     res.statusCode = 200;
     res.send(true);
 });

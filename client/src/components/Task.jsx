@@ -5,49 +5,51 @@ import { MdCheckBoxOutlineBlank } from "react-icons/md";
 import { FiEdit } from "react-icons/fi";
 
 const Task = ({
-    id,
-    task,
+    taskData,
     handleStatus,
     handleDelete,
-    status,
     setIsUpdating,
     setUpdateTask,
 }) => {
     return (
-        <li className={status ? "task completed" : "task"} data-id={id}>
-            <p>{task}</p>
+        <li className={taskData.status ? "task completed" : "task"}>
+            <p>{taskData.task}</p>
             <div className="actions">
-                {status ? (
+                {taskData.status ? (
                     <IoMdCheckboxOutline
                         className="check"
-                        onClick={() => handleStatus(id, 0)}
+                        onClick={() => handleStatus(taskData.id, 0)}
                     />
                 ) : (
                     <MdCheckBoxOutlineBlank
                         className="check"
-                        onClick={() => handleStatus(id, 1)}
+                        onClick={() => handleStatus(taskData.id, 1)}
                     />
                 )}
                 <FiEdit
                     className="edit"
                     onClick={() => {
                         setIsUpdating(true);
-                        setUpdateTask({ id, task, status });
+                        setUpdateTask(taskData);
                     }}
                 />
-                <MdDelete className="delete" onClick={() => handleDelete(id)} />
-                <span>{status ? "finished" : "active"}</span>
+                <MdDelete
+                    className="delete"
+                    onClick={() => handleDelete(taskData.id)}
+                />
             </div>
         </li>
     );
 };
 
 Task.propTypes = {
-    task: PropTypes.string,
+    taskData: PropTypes.shape({
+        id: PropTypes.number.isRequired,
+        task: PropTypes.string.isRequired,
+        status: PropTypes.number.isRequired,
+    }).isRequired,
     handleStatus: PropTypes.func.isRequired,
     handleDelete: PropTypes.func.isRequired,
-    id: PropTypes.number,
-    status: PropTypes.number,
     setIsUpdating: PropTypes.func.isRequired,
     setUpdateTask: PropTypes.func.isRequired,
 };
