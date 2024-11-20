@@ -46,6 +46,7 @@ function App() {
                 document
                     .querySelector(`[data-id="${id}"]`)
                     .classList.add("deleted");
+
                 const timeoutId = setTimeout(() => {
                     setTasks((currentTasks) =>
                         currentTasks.filter((task) => task.id !== id)
