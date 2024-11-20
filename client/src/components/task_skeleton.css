@@ -13,6 +13,9 @@
     border-radius: 5px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
+.skeleton:first-of-type {
+    margin-top: 15px;
+}
 .skeleton .skeleton_task {
     width: 70%;
     height: 20px;

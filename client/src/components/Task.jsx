@@ -12,7 +12,10 @@ const Task = ({
     setUpdateTask,
 }) => {
     return (
-        <li className={taskData.status ? "task completed" : "task"}>
+        <li
+            className={taskData.status ? "task completed" : "task"}
+            data-id={taskData.id}
+        >
             <p>{taskData.task}</p>
             <div className="actions">
                 {taskData.status ? (

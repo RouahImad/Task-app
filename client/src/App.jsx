@@ -4,7 +4,7 @@ import FormTask from "./components/FormTask";
 import Tasks from "./components/Tasks";
 import BarAction from "./components/BarAction";
 import TaskUpdateForm from "./components/TaskUpdateForm";
-import TaskSkeleton from "./components/TaskSkeleton";
+import SkeletonsList from "./components/SkeletonsList";
 
 function App() {
     const [tasks, setTasks] = useState([]);
@@ -12,11 +12,13 @@ function App() {
     const [inputTask, setInputTask] = useState();
     const [updateTask, setUpdateTask] = useState({});
     const [isUpdating, setIsUpdating] = useState(false);
+    const [isLoading, setIsLoading] = useState(true);
 
     useEffect(() => {
         axios
             .get("/tasks")
             .then(({ data }) => {
+                setIsLoading(false);
                 setTasks(data);
             })
             .catch((err) => {
@@ -116,14 +118,17 @@ function App() {
                 setInputTask={setInputTask}
             />
             <BarAction handleSelect={handleSelect} />
-            <Tasks
-                tasks={filteredTasks}
-                handleStatus={handleStatus}
-                handleDelete={handleDelete}
-                setIsUpdating={setIsUpdating}
-                setUpdateTask={setUpdateTask}
-            />
-            <TaskSkeleton />
+            {isLoading ? (
+                <SkeletonsList />
+            ) : (
+                <Tasks
+                    tasks={filteredTasks}
+                    handleStatus={handleStatus}
+                    handleDelete={handleDelete}
+                    setIsUpdating={setIsUpdating}
+                    setUpdateTask={setUpdateTask}
+                />
+            )}
             {isUpdating && (
                 <TaskUpdateForm
                     updateTask={updateTask}
